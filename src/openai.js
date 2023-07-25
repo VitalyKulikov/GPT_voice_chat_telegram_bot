@@ -13,9 +13,7 @@ export async function initCommand(ctx) {
 
 export async function processTextToChat(ctx, content) {
   try {
-    // пушим сообщения пользователя в сессию (в контекст)
     ctx.session.messages.push({role: openai.roles.USER, content})
-    // пушим сообщения бота в сессию (в контекст)
     const response = await openai.chat(ctx.session.messages)
     ctx.session.messages.push({
       role: openai.roles.ASSISTANT,
