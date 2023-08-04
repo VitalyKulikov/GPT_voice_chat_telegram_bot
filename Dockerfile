@@ -1,17 +1,9 @@
-# Используем официальный образ Node.js
-FROM node:14
-
-# Установка директории приложения в контейнере
-WORKDIR /usr/src/app
-
-# Копирование зависимостей package.json и package-lock.json
+FROM node:16-alpine
+WORKDIR /app
 COPY package*.json ./
-
-# Установка зависимостей
-RUN npm install
-
-# Копирование всех файлов приложения в рабочую директорию контейнера
+RUN npm ci
 COPY . .
-
-# Запуск приложения
-CMD [ "npm", "start" ]
+ENV PORT=3000
+EXPOSE $PORT
+CMD ["npm", "start"]
+`
